@@ -91,6 +91,10 @@ public class Przeciwnik {
 	public void setSilaAtaku(int silaAtaku) {
 		this.silaAtaku = silaAtaku;
 	}
+	
+	public int getRodzajPrzeciwnika() {
+		return rodzajPrzeciwnika;
+	}
 
 
 }

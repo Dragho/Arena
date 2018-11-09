@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Main{
 	
-	//
+	//metoda wczytywania save'a
 	private static void wczytywanie(Map<String, String> statystyki) throws IOException{
 		while(true) {
 			Scanner in = new Scanner(System.in);
@@ -113,6 +113,7 @@ public class Main{
 		
 	}
 	
+	//metoda zapisywania save'a
 	private static void zapisywanie(Postac bohater, int numerSave) throws IOException {
 		String k = "plik" + numerSave + ".txt";
 		BufferedWriter out = new BufferedWriter(new FileWriter(new File(k)));
@@ -136,6 +137,7 @@ public class Main{
 		out.close();
 	}
 	
+	//metoda symulujaca walke z konkretnym przeciwnikiem
 	private static void walka(Postac bohater, Przeciwnik przeciwnik, Scanner in) {
 		//deklaracja zmiennych
 		int wybor, szansaTrafienia,silaAtakuBohatera,szansaTrafieniaBohatera;
@@ -181,6 +183,10 @@ public class Main{
 				System.out.println("Przeciwnik pudluje!");
 			}
 		}
+		if(bohater.getAkthp()>0 && przeciwnik.getRodzajPrzeciwnika() == 3) {
+			System.out.println("Gratulacje pokonales finalowego przeciwnika! Zwyciestwo nalezy do ciebie!");
+			System.exit(0);
+		}
 		if(bohater.getAkthp()>0) {
 			System.out.println("Gratulacje, pokonales przeciwnika!");
 			System.out.printf("Zdobyles %d sztuk zlota%n",przeciwnik.getIloscZlota());
@@ -203,6 +209,7 @@ public class Main{
 		}
 	}
 	
+	//panel glowny wyboru
 	private static void panelGlowny(Postac bohater) throws IOException {
 		
 		Scanner in = new Scanner(System.in);
@@ -302,7 +309,7 @@ public class Main{
 		}while(wybor != 0);
 	}
 	
-	
+	//MAIN
 	public static void main(String [] args) throws IOException {
 		Scanner in = new Scanner(System.in);
 		Map<String,String> statystyki = new HashMap<>();
