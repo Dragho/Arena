@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Main{
 	
+	//
 	private static void wczytywanie(Map<String, String> statystyki) throws IOException{
 		while(true) {
 			Scanner in = new Scanner(System.in);
@@ -222,7 +223,8 @@ public class Main{
 			System.out.println("[3] Udaj sie na arene i walcz ze slabym przeciwnikiem");
 			System.out.println("[4] Udaj sie na arene i walcz z trudnym przeciwnikiem");
 			System.out.println("[5] Udaj sie na arene i walcz z finalowym przeciwnikiem");
-			System.out.println("[0] Aby wyjsc i zapisac gre");	
+			System.out.println("[9] Aby zapisac gre");
+			System.out.println("[0] Aby wyjsc z gry");	
 			wybor = in.nextInt();
 			
 			switch(wybor){
@@ -272,7 +274,7 @@ public class Main{
 					}
 				}
 				break;
-				case 0:
+				case 9:
 				{
 					System.out.println("Wybierz numer save'u:");
 					System.out.println("[1]");
@@ -283,6 +285,12 @@ public class Main{
 					int wyborZapisuSave = in.nextInt();
 					
 					zapisywanie(bohater,wyborZapisuSave);
+					System.out.println("ZAPISANO!");
+				}
+				break;
+				case 0:
+				{
+					
 					return;
 				}
 				
@@ -300,10 +308,6 @@ public class Main{
 		Map<String,String> statystyki = new HashMap<>();
 		
 		wczytywanie(statystyki);
-		
-		
-		
-		
 		
 	}
 	
