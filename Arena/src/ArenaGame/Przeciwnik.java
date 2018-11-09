@@ -15,7 +15,7 @@ public class Przeciwnik {
 		case 1:
 		{
 			this.akthp = rand.nextInt(10) + 80;
-			this.silaAtaku = rand.nextInt(10) + 10;
+			this.silaAtaku = rand.nextInt(11) + 10;
 			this.iloscDosw = rand.nextInt(60) + 80;
 			this.iloscZlota = rand.nextInt(20) + 30;
 			this.rodzajPrzeciwnika = 1;
@@ -24,7 +24,7 @@ public class Przeciwnik {
 		case 2:
 		{
 			this.akthp = rand.nextInt(20) + 120;
-			this.silaAtaku = rand.nextInt(20) + 30;
+			this.silaAtaku = rand.nextInt(21) + 30;
 			this.iloscDosw = rand.nextInt(100) + 160;
 			this.iloscZlota = rand.nextInt(40) + 80;
 			this.rodzajPrzeciwnika = 2;
@@ -33,7 +33,7 @@ public class Przeciwnik {
 		case 3:
 		{
 			this.akthp = rand.nextInt(1) + 300;
-			this.silaAtaku = rand.nextInt(30) + 60;
+			this.silaAtaku = rand.nextInt(31) + 60;
 			this.iloscDosw = rand.nextInt(100) + 400;
 			this.iloscZlota = rand.nextInt(1) + 300;
 			this.rodzajPrzeciwnika = 3;

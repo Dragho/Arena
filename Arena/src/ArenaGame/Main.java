@@ -17,6 +17,7 @@ public class Main{
 		while(true) {
 			Scanner in = new Scanner(System.in);
 			System.out.println("Podaj numer save'a");
+			System.out.println("[0] aby stworzyc nowa gre");
 			System.out.println("[1]");
 			System.out.println("[2]");
 			System.out.println("[3]");
@@ -24,9 +25,14 @@ public class Main{
 			System.out.println("[5] aby wyjsc z programu");
 			System.out.println("Twoj wybor:");
 			int nrSave = in.nextInt();
-			boolean wczytany = false;
 		
 			switch(nrSave) {
+			case 0:
+			{
+				Postac bohater = new Postac();
+				panelGlowny(bohater);
+			}
+			break;
 			case 1:
 			{
 				try {
@@ -36,8 +42,7 @@ public class Main{
 					}
 					in.close();
 					Postac bohater = new Postac(statystyki);
-					panelGlowny(statystyki,bohater);
-					wczytany = true;
+					panelGlowny(bohater);
 				} catch (FileNotFoundException e) {
 					System.out.println("Plik nie istnieje");
 				}
@@ -52,9 +57,8 @@ public class Main{
 						statystyki.put(in.next(), in.next());
 					}
 					in.close();
-					wczytany = true;
 					Postac bohater = new Postac(statystyki);
-					panelGlowny(statystyki,bohater);
+					panelGlowny(bohater);
 				} catch (FileNotFoundException e) {
 					System.out.println("Plik nie istnieje");
 				}
@@ -69,9 +73,8 @@ public class Main{
 						statystyki.put(in.next(), in.next());
 					}
 					in.close();
-					wczytany = true;
 					Postac bohater = new Postac(statystyki);
-					panelGlowny(statystyki,bohater);
+					panelGlowny(bohater);
 				} catch (FileNotFoundException e) {
 					System.out.println("Plik nie istnieje");
 				}
@@ -86,9 +89,8 @@ public class Main{
 						statystyki.put(in.next(), in.next());
 					}
 					in.close();
-					wczytany = true;
 					Postac bohater = new Postac(statystyki);
-					panelGlowny(statystyki,bohater);
+					panelGlowny(bohater);
 				} catch (FileNotFoundException e) {
 					System.out.println("Plik nie istnieje");
 				}
@@ -98,6 +100,7 @@ public class Main{
 			case 5:
 			{
 				return;
+				
 			}
 			default:
 			{
@@ -109,9 +112,10 @@ public class Main{
 		
 	}
 	
-	private static void zapisywanie(Postac bohater) throws IOException {
-		BufferedWriter out = new BufferedWriter(new FileWriter(new File("plik1.txt")));
-		String k = "akthp " + bohater.getAkthp();
+	private static void zapisywanie(Postac bohater, int numerSave) throws IOException {
+		String k = "plik" + numerSave + ".txt";
+		BufferedWriter out = new BufferedWriter(new FileWriter(new File(k)));
+		k = "akthp " + bohater.getAkthp();
 		out.write(k);
 		out.newLine();
 		k = "maxhp " + bohater.getMaxhp();
@@ -159,7 +163,7 @@ public class Main{
 				if(bohater.getNapoje()>0) {
 					System.out.println("Wypiles miksture, czujesz sie duzo lepiej!");
 					bohater.setNapoje(bohater.getNapoje()-1);
-					bohater.setAkthp(bohater.getAkthp()+50);
+					bohater.setAkthp(bohater.getAkthp()+(20 + 20 * bohater.getPoziom()));
 					if(bohater.getAkthp()>bohater.getMaxhp())bohater.setAkthp(bohater.getMaxhp());
 				}
 			}
@@ -179,10 +183,18 @@ public class Main{
 		if(bohater.getAkthp()>0) {
 			System.out.println("Gratulacje, pokonales przeciwnika!");
 			System.out.printf("Zdobyles %d sztuk zlota%n",przeciwnik.getIloscZlota());
-			System.out.printf("Zdobyles %d doswiadczenia%n", przeciwnik.getIloscDosw());
 			bohater.setZloto(bohater.getZloto()+przeciwnik.getIloscZlota());
-			bohater.setExp(bohater.getExp()+przeciwnik.getIloscDosw());
-			bohater.czyAwansowal();
+			if(bohater.getPoziom()<5) {
+				System.out.printf("Zdobyles %d doswiadczenia%n", przeciwnik.getIloscDosw());
+				bohater.setExp(bohater.getExp()+przeciwnik.getIloscDosw());
+				bohater.czyAwansowal();
+			}else {
+				System.out.println("Posiadasz juz maksymalny poziom");
+			}
+			
+			
+			
+			
 			
 		}else {
 			System.out.println("Niestety przegrales :C");
@@ -190,7 +202,7 @@ public class Main{
 		}
 	}
 	
-	private static void panelGlowny(Map<String, String> statystyki, Postac bohater) throws IOException {
+	private static void panelGlowny(Postac bohater) throws IOException {
 		
 		Scanner in = new Scanner(System.in);
 		int wybor = 0;
@@ -262,7 +274,15 @@ public class Main{
 				break;
 				case 0:
 				{
-					zapisywanie(bohater);
+					System.out.println("Wybierz numer save'u:");
+					System.out.println("[1]");
+					System.out.println("[2]");
+					System.out.println("[3]");
+					System.out.println("[4]");
+					in = new Scanner(System.in);
+					int wyborZapisuSave = in.nextInt();
+					
+					zapisywanie(bohater,wyborZapisuSave);
 					return;
 				}
 				
