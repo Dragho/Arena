@@ -1,3 +1,2 @@
 # Arena
-Text game with gladiators
-Created for college project purposes
+Text game with gladiators, created for college project purposes
